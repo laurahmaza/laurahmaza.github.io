@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+
+:root {
+  --cream: #FAF7F1;
+  --navy: #26415E;
+  --ink: #4A473F;
+  --ink-soft: #7A776D;
+  --rule: #E4DFD3;
+  --max-width: 700px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.page {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 6rem;
+}
+
+/* ---- Header (nav + photo, home page) ---- */
+
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin-bottom: 2.75rem;
+  flex-wrap: wrap;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+nav.site-nav {
+  display: flex;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+
+nav.site-nav a {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  margin-right: 1.75rem;
+}
+
+nav.site-nav a:last-child {
+  margin-right: 0;
+}
+
+nav.site-nav a[aria-current="page"] {
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+/* ---- Simple header (non-home pages) ---- */
+
+.simple-nav {
+  display: flex;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.simple-nav a {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  margin-right: 1.75rem;
+}
+
+.simple-nav a:last-child {
+  margin-right: 0;
+}
+
+.simple-nav a[aria-current="page"] {
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+/* ---- Headings ---- */
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 2.1rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin: 0 0 0.35rem;
+  line-height: 1.25;
+}
+
+.subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin: 0 0 1.75rem;
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin: 2.5rem 0 0.9rem;
+}
+
+/* ---- Body text ---- */
+
+p {
+  margin: 0 0 1.15rem;
+}
+
+a {
+  color: var(--navy);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--ink-soft);
+}
+
+.body-link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---- Projects (Research page) ---- */
+
+.project {
+  margin-bottom: 1.5rem;
+}
+
+.project .num {
+  color: var(--navy);
+  font-weight: 600;
+  margin-right: 0.4em;
+}
+
+.project .name {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.project .repo-link {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.92rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---- Contact page ---- */
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-list li {
+  margin-bottom: 1.1rem;
+}
+
+.contact-list a,
+.contact-email {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  word-break: break-all;
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+  .page {
+    padding: 2.5rem 1.25rem 4rem;
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
+  .header-row {
+    gap: 1.25rem;
+  }
+  .avatar {
+    width: 76px;
+    height: 76px;
+  }
+}
