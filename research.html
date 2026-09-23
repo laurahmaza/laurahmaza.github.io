@@ -4,70 +4,106 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Research — Laura H. Maza</title>
-  <meta name="description" content="Research question and project portfolio: how LLMs respond to purely linguistic variation.">
+  <meta name="description" content="Independent research on how large language models respond to linguistic form when meaning is held constant: voice, clause subordination and register.">
+  <link rel="canonical" href="https://laurahmaza.com/research.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Laura H. Maza">
+  <meta property="og:title" content="Research — Laura H. Maza">
+  <meta property="og:description" content="Independent research on how large language models respond to linguistic form when meaning is held constant: voice, clause subordination and register.">
+  <meta property="og:url" content="https://laurahmaza.com/research.html">
+  <meta property="og:image" content="https://laurahmaza.com/photo.jpg">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2250%22 fill=%22%2326415E%22/><text x=%2250%22 y=%2266%22 font-size=%2248%22 text-anchor=%22middle%22 fill=%22%23FAF7F1%22 font-family=%22Georgia,serif%22>LM</text></svg>">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="page">
-    <nav class="simple-nav" aria-label="Site">
-      <a href="index.html">Home</a>
+    <nav class="site-nav" aria-label="Site">
+      <a class="home-name" href="index.html">Laura H. Maza</a>
+      <a href="experience.html">Experience</a>
       <a href="research.html" aria-current="page">Research</a>
       <a href="log.html">Log</a>
       <a href="contact.html">Contact</a>
     </nav>
 
-    <h1 style="font-size:1.6rem;">Research</h1>
+    <h1>Research</h1>
+    <p class="lede">
+      Do a language model&rsquo;s next-token probabilities shift when the meaning of a
+      prompt stays the same but its linguistic form changes: active or passive voice,
+      simple or subordinated clauses, formal or informal register?
+    </p>
+    <p>
+      I measure that shift in the probability distribution itself, using
+      Jensen&ndash;Shannon divergence, rather than by comparing generated text. The
+      three contrasts come from functional grammar, so each one can be tested as a
+      separate, controlled variable instead of a loose bucket of paraphrases.
+      My decade teaching and analyzing English language and literature is what
+      makes that design possible; my decade in software is what makes it runnable.
+    </p>
 
-    <h2>Research Question</h2>
+    <h2 id="finding">First result (preliminary)</h2>
     <p>
-      Do large language models&rsquo; next-token probability distributions
-      shift when semantic content is held constant but surface linguistic
-      form varies &mdash; voice, clause subordination, register?
+      Run against <code>distilgpt2</code> at temperature 1.0, register moved the
+      next-token distribution far more than the other two contrasts.
     </p>
+    <figure>
+      <svg viewBox="0 0 700 220" role="img" aria-labelledby="chart-title" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">
+        <title id="chart-title">Jensen-Shannon divergence from baseline: register 0.7048 bits, voice 0.0463 bits, subordination 0.0213 bits</title>
+        <style>.lab{font:15px Lora,Georgia,serif;fill:#4A473F}.val{font:600 15px Lora,Georgia,serif;fill:#26415E}.ax{font:13px Lora,Georgia,serif;fill:#6F6C62}</style>
+        <line x1="235" y1="20" x2="235" y2="194" stroke="#E4DFD3" stroke-width="1.5"/>
+        <text x="221" y="42" text-anchor="end" class="lab">Formal vs. informal register</text><rect x="235" y="26" width="357.1" height="24" fill="#26415E"/><text x="602.1" y="43" class="val">0.7048 bits</text><text x="221" y="100" text-anchor="end" class="lab">Active vs. passive voice</text><rect x="235" y="84" width="23.5" height="24" fill="#8FA3B8"/><text x="268.5" y="101" class="val">0.0463 bits</text><text x="221" y="158" text-anchor="end" class="lab">Simple vs. subordinated clauses</text><rect x="235" y="142" width="10.8" height="24" fill="#8FA3B8"/><text x="255.8" y="159" class="val">0.0213 bits</text>
+        <text x="235" y="216" class="ax">Jensen&#8211;Shannon divergence from baseline (bits)</text>
+      </svg>
+      <figcaption>How far each change moved the next-token distribution. distilgpt2, temperature 1.0; register shifted it about 15&times; more than voice. Source: llm-probe.</figcaption>
+    </figure>
     <p>
-      This work measures that shift directly, using distributional
-      divergence between next-token predictions rather than surface-level
-      text comparison, to identify which linguistic dimensions a model
-      treats as meaningful versus superficial.
+      This partly confirmed my starting hypothesis: I expected register to dominate,
+      and it did. I also expected voice to matter least, and that was wrong;
+      subordination moved the distribution least.
     </p>
-    <p>
-      <strong>Why this question?</strong> A decade spent reading, teaching,
-      and analyzing English language and literature means fluency in
-      exactly the categories this question depends on: voice,
-      subordination, register, and the difference between what a sentence
-      says and how it says it. That background is the methodological
-      advantage here, not a detour from it.
+    <p class="muted">
+      Limits of this result: it rests on one prompt pair per contrast and a single
+      small model, and the formal variant is also the longest and most complex, so
+      part of the gap may be a length effect. The next step holds token count
+      constant and scales to many pairs per contrast and to larger models.
+      Full details are in the <a href="https://github.com/laurahmaza/llm-probe#limitations">repository&rsquo;s limitations section</a>.
     </p>
 
     <h2>Projects</h2>
 
     <div class="project">
-      <span class="num">01 —</span><span class="name">llm-probe</span>
-      <p style="margin-top:0.35rem;">
-        Inspects next-token logit distributions and quantifies their
-        sensitivity to linguistic rephrasing across three axes: voice,
-        subordination, and register.
-      </p>
-      <a class="repo-link" href="https://github.com/laurahmaza/llm-probe">github.com/laurahmaza/llm-probe</a>
+      <h3>llm-probe</h3>
+      <p>A command-line tool that shows a model&rsquo;s raw next-token distribution, how
+      temperature reshapes it, and how far it moves under controlled changes in voice,
+      clause structure and register. Tested against a deterministic stand-in model
+      so the logic can be verified without a GPU.</p>
+      <a href="https://github.com/laurahmaza/llm-probe">github.com/laurahmaza/llm-probe</a>
     </div>
 
     <div class="project">
-      <span class="num">02 —</span><span class="name">eval-harness</span>
-      <p style="margin-top:0.35rem;">
-        A versioned evaluation harness supporting deterministic,
-        LLM-as-judge, and human scoring, with run-to-run comparison
-        built for CI quality gates.
-      </p>
-      <a class="repo-link" href="https://github.com/laurahmaza/eval-harness">github.com/laurahmaza/eval-harness</a>
+      <h3>eval-harness</h3>
+      <p>A versioned evaluation harness that answers one question: if I change the
+      prompt or the model, did quality go up or down, on which cases, and can I prove
+      it? It supports deterministic, LLM-as-judge and human scoring, and a run
+      comparison that fails a CI check when anything regresses.</p>
+      <a href="https://github.com/laurahmaza/eval-harness">github.com/laurahmaza/eval-harness</a>
     </div>
 
     <div class="project">
-      <span class="num">03 —</span><span class="name">[in progress]</span>
+      <h3>Cited retrieval over regulatory text</h3>
+      <span class="status">Coming soon</span>
+      <p>A retrieval pipeline that answers questions about the NIST AI RMF and related regulation, citing the exact passage behind every answer.</p>
     </div>
 
-    <div class="project">
-      <span class="num">04 —</span><span class="name">[in progress]</span>
-    </div>
+    <p class="small muted" style="margin-top:2rem;">
+      ORCID <a href="https://orcid.org/0009-0006-5298-9481">0009-0006-5298-9481</a> &middot;
+      <a href="https://huggingface.co/laurahmaza">Hugging Face</a> &middot;
+      <a href="log.html">Weekly research log</a>
+    </p>
+
+    <footer class="site-footer">
+      Laura H. Maza &middot; Las Vegas, Nevada &middot; <a href="mailto:laurahmaza001@gmail.com">laurahmaza001@gmail.com</a>
+    </footer>
   </main>
 </body>
 </html>
